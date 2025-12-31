@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acolhimento - Centro de Acolhimento Bartimeu</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Merriweather', serif; }
+        
+        .header-bg {
+            background-image: linear-gradient(rgba(0, 50, 30, 0.8), rgba(0, 50, 30, 0.7)), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: #16a34a;
+        }
+        .photo-frame {
+            border: 8px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease;
+        }
+        .photo-frame:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Navbar (Mesma do Index para consistência) -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo transparente.png" alt="Logo CAB" class="h-16 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60?text=CAB+Logo'; this.style.opacity='0.5';">
+                <div class="hidden md:block">
+                    <span class="block text-xl font-bold text-green-800 leading-tight">Centro de Acolhimento</span>
+                    <span class="block text-lg font-light text-gray-600 leading-tight">Bartimeu</span>
+                </div>
+            </a>
+            
+            <!-- Botão Voltar -->
+            <a href="index.html" class="flex items-center text-green-700 font-bold hover:text-green-900 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar ao Início
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header da Página -->
+    <header class="header-bg h-[50vh] flex items-center justify-center text-center px-4 mt-20">
+        <div class="max-w-4xl mx-auto text-white">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">Passos para o Acolhimento</h1>
+            <p class="text-xl font-light text-green-100">"Vem e vê." - O primeiro passo para a mudança é o desejo sincero de recomeçar.</p>
+        </div>
+    </header>
+
+    <!-- Introdução -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Como funciona o ingresso no CAB?</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                O Centro de Acolhimento Bartimeu não é uma clínica de internação involuntária. Somos uma comunidade terapêutica fundamentada na disciplina, no trabalho e na espiritualidade cristã à luz da Doutrina Espírita.
+            </p>
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 text-left rounded shadow-sm">
+                <p class="text-yellow-800 font-bold"><i class="fas fa-exclamation-triangle mr-2"></i>Importante:</p>
+                <p class="text-sm text-yellow-700 mt-1">
+                    No momento, estamos em fase de construção da sede física. Estamos realizando o <strong>pré-cadastro</strong> e orientação familiar. O acolhimento residencial iniciará após a inauguração.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção das Duas Fotos (Solicitado) -->
+    <section class="py-12 bg-green-50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center max-w-6xl mx-auto">
+                
+                <!-- Foto 1: Laborterapia -->
+                <div class="text-center">
+                    <div class="photo-frame relative h-80 w-full rounded-lg overflow-hidden mb-6">
+                        <img src="laborterapia2-scaled.jpg" alt="Laborterapia e Trabalho" class="object-cover w-full h-full">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white text-xl font-bold">O Trabalho que Dignifica</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm px-4">
+                        Acreditamos na <strong>Laborterapia</strong>. O contato com a terra, a manutenção da casa e a produção de alimentos ajudam a reorganizar a mente e devolvem ao acolhido o senso de utilidade e responsabilidade.
+                    </p>
+                </div>
+
+                <!-- Foto 2: Espiritualidade/Convivência -->
+                <div class="text-center">
+                    <div class="photo-frame relative h-80 w-full rounded-lg overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Espiritualidade e União" class="object-cover w-full h-full">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white text-xl font-bold">Reforma Íntima e Oração</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm px-4">
+                        Através do Evangelho e da convivência fraterna, buscamos a <strong>Reforma Íntima</strong>. Não basta parar de usar substâncias; é preciso mudar o estilo de vida e reencontrar valores espirituais.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- O Processo de Triagem (Passo a Passo) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-3xl font-bold text-gray-800 mb-12 text-center">Passo a Passo para o Ingresso</h2>
+            
+            <div class="space-y-6">
+                <!-- Passo 1 -->
+                <div class="step-card bg-white border border-gray-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
+                    <div class="bg-green-100 text-green-700 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-green-900 mb-2">A Vontade Própria (Carta de Solicitação)</h3>
+                        <p class="text-gray-600">
+                            O primeiro requisito é o desejo do candidato. Ele deve escrever uma carta de próprio punho, manifestando sua vontade de se recuperar e de aceitar as regras da casa.
+                        </p>
+                        <p class="text-sm text-gray-500 mt-2 italic">"Ninguém é curado contra a sua vontade."</p>
+                    </div>
+                </div>
+
+                <!-- Passo 2 -->
+                <div class="step-card bg-white border border-gray-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
+                    <div class="bg-green-100 text-green-700 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-green-900 mb-2">Entrevista de Triagem</h3>
+                        <p class="text-gray-600">
+                            Realizada por nossa equipe de acolhimento (assistente social e voluntários experientes). É o momento de conhecer a história do irmão e avaliar se o perfil do CAB é adequado para o seu caso.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Passo 3 -->
+                <div class="step-card bg-white border border-gray-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
+                    <div class="bg-green-100 text-green-700 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-green-900 mb-2">Exames Médicos</h3>
+                        <p class="text-gray-600">
+                            Para a segurança de todos na comunidade, solicitamos uma bateria de exames (Hemograma, Teste de Tuberculose, HIV, Hepatite, etc.) e, em alguns casos, laudo psiquiátrico que ateste aptidão para convívio em grupo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Passo 4 -->
+                <div class="step-card bg-white border border-gray-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
+                    <div class="bg-green-100 text-green-700 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">4</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-green-900 mb-2">A Família como Base</h3>
+                        <p class="text-gray-600">
+                            Enquanto o acolhido se trata no CAB, a família deve participar dos grupos de apoio (semelhante ao Amor Exigente). A recuperação é um processo sistêmico; a família também precisa adoeceu e precisa de cura.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O que levar (Enxoval) -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">O que levar?</h2>
+            <div class="bg-white p-8 rounded-xl shadow border border-gray-200">
+                <p class="mb-4 text-gray-600 text-center">O acolhido deve trazer apenas o necessário para uma vida simples e desapegada.</p>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Roupas confortáveis para trabalho (calça jeans, botas)</li>
+                        <li>Roupas para atividades físicas</li>
+                        <li>Produtos de higiene pessoal (sem álcool)</li>
+                        <li>Bíblia e O Evangelho Segundo o Espiritismo</li>
+                    </ul>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Roupa de cama e banho</li>
+                        <li>Caderno e caneta para diário espiritual</li>
+                        <li>Documentos pessoais (RG, CPF, Cartão SUS)</li>
+                        <li class="text-red-600 font-bold">Proibido: Celular, eletrônicos, cigarros.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-16 bg-green-900 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-4">Precisa de Ajuda ou quer Agendar uma Visita?</h2>
+            <p class="text-green-100 mb-8 max-w-2xl mx-auto">
+                Nossa equipe de voluntários está pronta para tirar suas dúvidas e orientar sobre o processo de pré-cadastro.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="https://wa.me/seunumerodewhatsapp" class="bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-8 rounded-full transition shadow-lg flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2 text-xl"></i> Falar no WhatsApp
+                </a>
+                <a href="mailto:contato@cabartimeu.org.br" class="bg-transparent border-2 border-white hover:bg-white hover:text-green-900 text-white font-bold py-3 px-8 rounded-full transition flex items-center justify-center">
+                    <i class="fas fa-envelope mr-2"></i> Enviar E-mail
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé (Simplificado) -->
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Centro de Acolhimento Bartimeu. Todos os direitos reservados.</p>
+            <p class="mt-2">"Fora da caridade não há salvação."</p>
+        </div>
+    </footer>
+
+</body>
+</html>

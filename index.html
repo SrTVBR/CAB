@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Acolhimento Bartimeu - Luz e Recomeço</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 50, 30, 0.7), rgba(0, 50, 30, 0.6)), url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .volunteer-bg {
+            background-image: linear-gradient(rgba(22, 163, 74, 0.9), rgba(21, 128, 61, 0.9)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #16a34a; /* Verde esperança */
+            margin: 10px auto;
+        }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+            overflow-x: hidden;
+            overflow-y: visible !important;
+        }
+        
+        /* Calendar Styles */
+        .calendar-day {
+            min-height: 80px;
+            transition: all 0.2s;
+        }
+        .calendar-day:hover {
+            background-color: #f0fdf4;
+        }
+        .has-event {
+            cursor: pointer;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+        .has-event:hover {
+            background-color: #dcfce7;
+            transform: scale(1.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .event-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #16a34a;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .event-label {
+            font-size: 0.7rem;
+            color: #166534;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Payment Buttons */
+        .btn-payment {
+            transition: all 0.3s;
+        }
+        .btn-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3">
+                <img src="Logo transparente.png" alt="Logo CAB" class="h-16 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60?text=CAB+Logo'; this.style.opacity='0.5';">
+                <div class="hidden md:block">
+                    <span class="block text-xl font-bold text-green-800 leading-tight">Centro de Acolhimento</span>
+                    <span class="block text-lg font-light text-gray-600 leading-tight">Bartimeu</span>
+                </div>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <a href="#inicio" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Início</a>
+                <a href="#sobre" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">O Centro</a>
+                <a href="acolhimento.html" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Acolhimento</a>
+                <a href="#metodologia" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Nossa Base</a>
+                <a href="#agenda" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Agenda</a>
+                <a href="voluntariado.html" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Voluntariado</a>
+                <a href="#obras" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Obras</a>
+                <a href="#doacao" class="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg transform hover:-translate-y-0.5 text-sm">
+                    <i class="fas fa-heart mr-1"></i>Doar
+                </a>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Início</a>
+            <a href="#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">O Centro</a>
+            <a href="acolhimento.html" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Quero Ajuda (Acolhimento)</a>
+            <a href="#metodologia" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Nossa Base</a>
+            <a href="#agenda" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Calendário de Eventos</a>
+            <a href="voluntariado.html" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Seja Voluntário</a>
+            <a href="#obras" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Acompanhar Obra</a>
+            <a href="#doacao" class="block py-3 px-6 text-green-700 font-bold bg-green-50">Fazer Doação</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero-bg h-screen flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl mx-auto text-white relative z-10 pt-20">
+            <p class="text-lg md:text-xl font-light mb-4 italic text-green-100">"Senhor, que eu veja." (Marcos 10:51)</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">Bem-vindo ao Centro de Acolhimento Bartimeu</h1>
+            <p class="text-xl md:text-2xl mb-8 font-light text-gray-100">Um novo horizonte de esperança, reforma íntima e trabalho sob a luz da Doutrina Espírita.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="acolhimento.html" class="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-green-900 transition font-semibold">
+                    Preciso de Ajuda
+                </a>
+                <!-- Link Alterado para a nova página -->
+                <a href="voluntariado.html" class="bg-yellow-500 border-2 border-yellow-500 text-green-900 px-8 py-3 rounded-full hover:bg-yellow-400 hover:border-yellow-400 transition font-bold shadow-lg">
+                    Seja um Voluntário
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- Sobre Nós -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 section-title">Quem Somos</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Uma associação sem fins lucrativos dedicada à recuperação do ser humano através do amor e da disciplina.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition duration-500">
+                    <!-- Imagem atualizada -->
+                    <img src="maosplantando.jpeg" alt="Mãos plantando" class="w-full h-auto">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">Acolhimento e Reforma Íntima</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        O Centro de Acolhimento Bartimeu (CAB) é um ambiente propício para o reencontro consigo mesmo e com Deus. Inspirados no episódio bíblico do cego de Jericó, buscamos auxiliar aqueles que desejam "ver" uma nova vida, livre das amarras da dependência.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Nossa instituição compartilha do ideal de comunidades terapêuticas de excelência, diferenciando-se pela aplicação prática e vivencial dos princípios da <strong>Doutrina Espírita</strong>: a fé raciocinada, a caridade moral e material, e a certeza da imortalidade da alma como motores de mudança.
+                    </p>
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <p class="italic text-gray-600 text-sm">
+                            "Onde quer que estejas, seja a alma deste lugar... Discute-se, observa-se e analisa-se em toda parte. Mas só o trabalho serve."
+                        </p>
+                        <p class="text-right text-xs font-bold text-green-800 mt-2">- Emmanuel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossa Base (Metodologia) -->
+    <section id="metodologia" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 section-title">Nossa Tríade de Apoio</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Baseamos nossa convivência em três pilares fundamentais para o fortalecimento do espírito.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition duration-300 text-center">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Estudo e Espiritualidade</h3>
+                    <p class="text-gray-600 text-sm">
+                        O estudo do Evangelho Segundo o Espiritismo e a prática da oração são ferramentas diárias para a conscientização e a mudança de padrões mentais (Evangelhoterapia).
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition duration-300 text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-hands-holding-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Convivência Fraterna</h3>
+                    <p class="text-gray-600 text-sm">
+                        A vida em comunidade ensina o respeito, a tolerância e o amor ao próximo. Aqui, somos uma família onde uns apoiam a caminhada dos outros.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition duration-300 text-center">
+                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Trabalho (Laborterapia)</h3>
+                    <p class="text-gray-600 text-sm">
+                        O trabalho dignifica e ocupa a mente. Através do cuidado com a terra, horta e manutenção da casa, o acolhido redescobre seu valor e suas capacidades.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendário de Eventos (Restaurado) -->
+    <section id="agenda" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 section-title">Calendário de Luz</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Participe de nossas atividades, palestras e ações beneficentes. Sua presença fortalece nossa causa.</p>
+            </div>
+
+            <!-- Calendar Container -->
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+                <!-- Month Header -->
+                <div class="bg-green-700 text-white p-4 flex justify-between items-center">
+                    <button class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-left"></i></button>
+                    <h3 class="text-xl font-bold uppercase tracking-wide">Outubro 2025</h3>
+                    <button class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- Days Header -->
+                <div class="grid grid-cols-7 bg-green-50 text-green-800 font-bold text-center py-2 text-sm border-b">
+                    <div>DOM</div>
+                    <div>SEG</div>
+                    <div>TER</div>
+                    <div>QUA</div>
+                    <div>QUI</div>
+                    <div>SEX</div>
+                    <div>SÁB</div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="grid grid-cols-7 text-sm">
+                    <!-- Previous Month Days -->
+                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">28</div>
+                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">29</div>
+                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">30</div>
+                    
+                    <!-- Current Month Days -->
+                    <div class="calendar-day p-2 border-r border-b">1</div>
+                    <div class="calendar-day p-2 border-r border-b">2</div>
+                    
+                    <!-- Event Day -->
+                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Palestra Pública: O Poder da Fé', '03/10/2025', '19:30', 'Centro Espírita Tomás de Aquino', 'Uma reflexão sobre como a fé raciocinada pode mover montanhas em nossas vidas. Aberto ao público.')">
+                        <span class="font-bold">3</span>
+                        <div class="mt-2">
+                            <span class="event-dot"></span>
+                            <span class="event-label">Palestra Pública</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-day p-2 border-r border-b">4</div>
+                    <div class="calendar-day p-2 border-r border-b">5</div>
+                    <div class="calendar-day p-2 border-r border-b">6</div>
+                    <div class="calendar-day p-2 border-r border-b">7</div>
+                    <div class="calendar-day p-2 border-r border-b">8</div>
+                    <div class="calendar-day p-2 border-r border-b">9</div>
+
+                    <!-- Event Day -->
+                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Bazar Solidário da Construção', '10/10/2025', '09:00 às 17:00', 'Sede do CAB (Terreno)', 'Grande bazar de roupas, utensílios e lanches. Toda a renda será revertida para a compra de cimento para o alicerce.')">
+                        <span class="font-bold">10</span>
+                        <div class="mt-2">
+                            <span class="event-dot bg-yellow-500"></span>
+                            <span class="event-label text-yellow-700">Bazar Beneficente</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-day p-2 border-r border-b">11</div>
+                    <div class="calendar-day p-2 border-r border-b">12</div>
+                    <div class="calendar-day p-2 border-r border-b">13</div>
+                    <div class="calendar-day p-2 border-r border-b">14</div>
+                    <div class="calendar-day p-2 border-r border-b">15</div>
+                    <div class="calendar-day p-2 border-r border-b">16</div>
+                    <div class="calendar-day p-2 border-r border-b">17</div>
+                    
+                    <!-- Event Day -->
+                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Mutirão de Limpeza', '18/10/2025', '07:00', 'Sede do CAB (Terreno)', 'Convidamos todos os voluntários para um dia de trabalho e alegria. Vamos preparar o terreno para a fundação. Traga suas luvas!')">
+                        <span class="font-bold">18</span>
+                        <div class="mt-2">
+                            <span class="event-dot bg-blue-500"></span>
+                            <span class="event-label text-blue-700">Mutirão</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-day p-2 border-r border-b">19</div>
+                    <div class="calendar-day p-2 border-r border-b">20</div>
+                    <div class="calendar-day p-2 border-r border-b">21</div>
+                    <div class="calendar-day p-2 border-r border-b">22</div>
+                    <div class="calendar-day p-2 border-r border-b">23</div>
+                    <div class="calendar-day p-2 border-r border-b">24</div>
+                    <div class="calendar-day p-2 border-r border-b">25</div>
+                    <div class="calendar-day p-2 border-r border-b">26</div>
+                    <div class="calendar-day p-2 border-r border-b">27</div>
+                    <div class="calendar-day p-2 border-r border-b">28</div>
+                    <div class="calendar-day p-2 border-r border-b">29</div>
+                    <div class="calendar-day p-2 border-r border-b">30</div>
+                    <div class="calendar-day p-2 border-r border-b">31</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <p class="text-sm text-gray-500"><i class="fas fa-info-circle mr-1"></i> Clique nos dias marcados para ver detalhes do evento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status da Obra -->
+    <section id="obras" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 section-title md:mx-0 md:ml-0">Acompanhe a Construção</h2>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        Estamos trabalhando com dedicação nos trâmites legais para tornar este sonho realidade. Transparência é nosso compromisso.
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <h4 class="font-bold text-green-800 mb-2">Próximos Passos:</h4>
+                        <p class="text-gray-700">
+                            Em 2026 daremos início imediato à construção física em nosso terreno na Estrada AM-010 com inauguração prevista para o mesmo ano.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-green-900 text-white p-8 rounded-lg text-center relative overflow-hidden">
+                    <div class="relative z-10">
+                        <i class="fas fa-envelope-open-text text-5xl text-green-300 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Newsletter do Bartimeu</h3>
+                        <p class="mb-4 text-sm text-green-100">Receba notícias sobre o avanço da obra.</p>
+                        <form class="flex flex-col gap-3">
+                            <input type="email" placeholder="Seu melhor e-mail" class="px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <p class="text-xs text-left text-green-200">*Seus dados estão seguros.</p>
+                            <button type="button" onclick="alert('Obrigado! Em breve entraremos em contato.')" class="bg-yellow-500 text-green-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition">
+                                Inscrever-se
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doações -->
+    <section id="doacao" class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 section-title">Ajude a Construir o CAB</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mt-4 mb-10">
+                Sua generosidade é o alicerce desta obra de amor. Escolha como deseja contribuir.
+            </p>
+
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+                <!-- Tabs Header -->
+                <div class="flex border-b flex-col md:flex-row">
+                    <div class="w-full md:w-1/2 py-4 text-green-700 font-bold bg-green-50 border-b-2 border-green-600">
+                        <i class="fas fa-hand-holding-usd mr-2"></i>Contribuição Financeira
+                    </div>
+                    <div class="w-full md:w-1/2 py-4 text-gray-700 font-bold bg-gray-50">
+                        <i class="fas fa-truck-loading mr-2"></i>Materiais de Construção
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- Coluna Financeira (Botões de Pagamento) -->
+                        <div class="text-left border-r md:border-r-gray-200 pr-0 md:pr-8">
+                            <h3 class="text-xl font-bold text-green-800 mb-2">Faça sua Doação Agora</h3>
+                            <p class="text-gray-600 mb-6 text-sm">Escolha o método de sua preferência. O recibo será enviado automaticamente para seu e-mail.</p>
+                            
+                            <div class="space-y-4">
+                                <!-- Botão Cartão -->
+                                <button onclick="openDonationModal('credit_card')" class="btn-payment w-full bg-blue-600 text-white py-4 rounded-lg font-bold flex items-center justify-between px-6 shadow-md border border-blue-700">
+                                    <span class="flex items-center"><i class="fas fa-credit-card mr-3 text-xl"></i> Cartão de Crédito</span>
+                                    <i class="fas fa-chevron-right opacity-50"></i>
+                                </button>
+
+                                <!-- Botão Google Pay -->
+                                <button onclick="openDonationModal('google_pay')" class="btn-payment w-full bg-black text-white py-4 rounded-lg font-bold flex items-center justify-between px-6 shadow-md border border-gray-800">
+                                    <span class="flex items-center"><i class="fab fa-google-pay mr-3 text-2xl"></i> Google Pay</span>
+                                    <i class="fas fa-chevron-right opacity-50"></i>
+                                </button>
+
+                                <!-- Botão Depósito/PIX -->
+                                <button onclick="openDonationModal('bank_transfer')" class="btn-payment w-full bg-green-600 text-white py-4 rounded-lg font-bold flex items-center justify-between px-6 shadow-md border border-green-700">
+                                    <span class="flex items-center"><i class="fas fa-university mr-3 text-xl"></i> Depósito / PIX</span>
+                                    <i class="fas fa-chevron-right opacity-50"></i>
+                                </button>
+                            </div>
+                            
+                            <p class="text-xs text-gray-400 mt-4 text-center"><i class="fas fa-lock mr-1"></i> Ambiente Seguro. Seus dados estão protegidos.</p>
+                        </div>
+                        
+                        <!-- Coluna Materiais (Mantida igual) -->
+                        <div class="text-left pl-0 md:pl-4">
+                            <h3 class="text-xl font-bold text-green-800 mb-4">Doação de Materiais</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Aceitamos doações de cimento, tijolos, areia, madeira e outros insumos.
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 p-3 rounded border border-blue-100">
+                                    <h5 class="font-bold text-blue-800 text-sm"><i class="fas fa-map-pin mr-2"></i>Ponto de Coleta 1 (Sede Urbana)</h5>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        <strong>Centro Espírita Tomás de Aquino</strong><br>
+                                        Bairro Nossa Sra. das Graças, Manaus - AM<br>
+                                        CEP 69033-390
+                                    </p>
+                                    <a href="https://share.google/bAwTGkrVx2scCPfmO" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 font-semibold mt-2 inline-flex items-center">
+                                        <i class="fas fa-external-link-alt mr-1"></i> Ver no Google Maps
+                                    </a>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded border border-green-100">
+                                    <h5 class="font-bold text-green-800 text-sm"><i class="fas fa-map-marked-alt mr-2"></i>Ponto de Coleta 2 (Obra)</h5>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        Entrega direta no terreno (Estrada AM-010, Km 33).<br>
+                                        <em>Agendar previamente.</em>
+                                    </p>
+                                    <a href="https://share.google/ZEaWEvS9lOfinyAPA" target="_blank" class="text-xs text-green-600 hover:text-green-800 font-semibold mt-2 inline-flex items-center">
+                                        <i class="fas fa-external-link-alt mr-1"></i> Ver no Google Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contato" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Centro de Acolhimento Bartimeu</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Uma obra de amor e regeneração baseada nos preceitos da Doutrina Espírita.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Navegação</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-green-400 transition">Início</a></li>
+                        <li><a href="#sobre" class="hover:text-green-400 transition">O Projeto</a></li>
+                        <li><a href="#agenda" class="hover:text-green-400 transition">Agenda</a></li>
+                        <li><a href="voluntariado.html" class="hover:text-green-400 transition">Voluntariado</a></li>
+                        <li><a href="#doacao" class="hover:text-green-400 transition">Contribua</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Localização da Sede (Futura)</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-green-500"></i>
+                            <span>
+                                Estrada AM - 010, Lote 12, Gleba 09<br>
+                                Colônia Ephigenio Salles, Km 33 (Placa 29km)<br>
+                                Zona Rural - Manaus/AM<br>
+                                CEP 69019-400
+                            </span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-green-500"></i>
+                            <span>contato@cabartimeu.org.br</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2025 Centro de Acolhimento Bartimeu.</p>
+                <div class="mt-2 md:mt-0 space-x-4">
+                    <a href="#" onclick="openModal('privacyModal'); return false;" class="text-gray-500 hover:text-green-400 transition">Política de Privacidade</a>
+                    <a href="#" onclick="openModal('termsModal'); return false;" class="text-gray-500 hover:text-green-400 transition">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Detalhes do Evento (RESTAURADO) -->
+    <div id="eventModal" class="modal fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Overlay -->
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('eventModal')"></div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Panel -->
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <!-- Cabeçalho com cor -->
+                <div class="bg-green-600 px-4 py-4 sm:px-6 flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-bold text-white" id="eventTitle">Título do Evento</h3>
+                    <button onclick="closeModal('eventModal')" class="text-green-200 hover:text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 text-center text-green-600 mt-1">
+                                <i class="far fa-calendar-alt text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-500 uppercase">Data</h4>
+                                <p id="eventDate" class="text-gray-800 font-medium">--/--/----</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 text-center text-green-600 mt-1">
+                                <i class="far fa-clock text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-500 uppercase">Horário</h4>
+                                <p id="eventTime" class="text-gray-800 font-medium">--:--</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 text-center text-green-600 mt-1">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-500 uppercase">Local</h4>
+                                <p id="eventLocation" class="text-gray-800 font-medium">--</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t pt-4 mt-2">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase mb-2">Sobre o Evento</h4>
+                            <p id="eventDescription" class="text-gray-600 text-sm leading-relaxed">
+                                Descrição do evento aqui.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal('eventModal')" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Coleta de Dados para Doação -->
+    <div id="donationFormModal" class="modal fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('donationFormModal')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
+                <div class="bg-green-600 px-4 py-4 sm:px-6 flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-bold text-white"><i class="fas fa-hand-holding-heart mr-2"></i> Dados para Recibo</h3>
+                    <button onclick="closeModal('donationFormModal')" class="text-green-200 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="bg-white px-6 pt-5 pb-4">
+                    <form id="donationForm" onsubmit="processDonation(event)">
+                        <input type="hidden" id="selectedPaymentMethod">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="donorName">Nome Completo</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="donorName" type="text" required placeholder="Seu nome">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="donorEmail">E-mail para Envio do Recibo</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="donorEmail" type="email" required placeholder="seu@email.com">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="donorCPF">CPF (Opcional)</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="donorCPF" type="text" placeholder="000.000.000-00">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="donationAmount">Valor da Doação (R$)</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 font-bold">R$</span>
+                                </div>
+                                <input class="shadow appearance-none border rounded w-full py-2 pl-10 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-lg font-bold" id="donationAmount" type="number" min="1" step="any" required placeholder="0,00">
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline transition w-full">
+                                Prosseguir para Pagamento <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Feedback de Pagamento / Instruções -->
+    <div id="paymentInfoModal" class="modal fixed inset-0 z-[70] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('paymentInfoModal')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
+                <div class="bg-gray-50 px-4 py-4 sm:px-6 flex justify-end">
+                    <button onclick="closeModal('paymentInfoModal')" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="px-6 pb-8 text-center" id="paymentContent">
+                    <!-- Conteúdo dinâmico será inserido aqui via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Política de Privacidade -->
+    <div id="privacyModal" class="modal fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background Overlay -->
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('privacyModal')"></div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Content -->
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                                <h3 class="text-2xl leading-6 font-bold text-gray-900" id="modal-title">Política de Privacidade</h3>
+                                <button onclick="closeModal('privacyModal')" class="text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-sm text-gray-600 overflow-y-auto max-h-[60vh] space-y-4 text-justify pr-2">
+                                <p><strong>Última atualização: 2025</strong></p>
+                                
+                                <p>O <strong>Centro de Acolhimento Bartimeu (CAB)</strong>, associação privada sem fins lucrativos em fase de constituição, está comprometido com a proteção de seus dados pessoais. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).</p>
+
+                                <h4 class="font-bold text-gray-800 mt-4">1. Coleta de Dados</h4>
+                                <p>Coletamos o mínimo necessário de informações para manter o relacionamento com nossos colaboradores e voluntários. Atualmente, os dados coletados através deste site limitam-se a:</p>
+                                <ul class="list-disc pl-5">
+                                    <li>Nome e E-mail (através do formulário de newsletter).</li>
+                                    <li>Dados de navegação (Cookies) para fins estatísticos.</li>
+                                </ul>
+
+                                <h4 class="font-bold text-gray-800 mt-4">2. Finalidade do Uso dos Dados</h4>
+                                <p>Os dados coletados têm como única finalidade:</p>
+                                <ul class="list-disc pl-5">
+                                    <li>Informar sobre o andamento das obras e inauguração da sede.</li>
+                                    <li>Convidar para ações de voluntariado e campanhas de doação.</li>
+                                    <li>Responder a dúvidas enviadas por e-mail.</li>
+                                </ul>
+                                <p>Não vendemos, alugamos ou compartilhamos seus dados com terceiros para fins comerciais.</p>
+
+                                <h4 class="font-bold text-gray-800 mt-4">3. Seus Direitos</h4>
+                                <p>Conforme a LGPD, você tem o direito de solicitar a qualquer momento:</p>
+                                <ul class="list-disc pl-5">
+                                    <li>A confirmação da existência de tratamento de seus dados.</li>
+                                    <li>O acesso aos dados.</li>
+                                    <li>A correção de dados incompletos ou desatualizados.</li>
+                                    <li>A eliminação dos dados (descadastramento da newsletter).</li>
+                                </ul>
+
+                                <h4 class="font-bold text-gray-800 mt-4">4. Cookies</h4>
+                                <p>Utilizamos cookies essenciais para o funcionamento do site e cookies analíticos para entender como os visitantes interagem com nossa página, visando sempre a melhoria da experiência do usuário.</p>
+
+                                <h4 class="font-bold text-gray-800 mt-4">5. Contato</h4>
+                                <p>Para exercer seus direitos ou tirar dúvidas sobre esta política, entre em contato através do e-mail: <strong>contato@cabartimeu.org.br</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal('privacyModal')" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Entendi e Concordo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Termos de Uso -->
+    <div id="termsModal" class="modal fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background Overlay -->
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('termsModal')"></div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Content -->
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                                <h3 class="text-2xl leading-6 font-bold text-gray-900" id="modal-title">Termos de Uso</h3>
+                                <button onclick="closeModal('termsModal')" class="text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-sm text-gray-600 overflow-y-auto max-h-[60vh] space-y-4 text-justify pr-2">
+                                <p>Bem-vindo ao site do <strong>Centro de Acolhimento Bartimeu (CAB)</strong>. Ao acessar e utilizar este site, você concorda com os seguintes termos e condições:</p>
+                                <h4 class="font-bold text-gray-800 mt-4">1. Finalidade do Site</h4>
+                                <p>Este site tem caráter informativo e institucional, visando divulgar o projeto de construção e implantação do Centro de Acolhimento Bartimeu, bem como angariar recursos e voluntários para a causa.</p>
+                                <h4 class="font-bold text-gray-800 mt-4">2. Propriedade Intelectual</h4>
+                                <p>Todo o conteúdo deste site, incluindo textos, logotipos (Marca CAB), imagens e layout, é de propriedade exclusiva do Centro de Acolhimento Bartimeu ou de terceiros que autorizaram seu uso.</p>
+                                <h4 class="font-bold text-gray-800 mt-4">3. Conduta do Usuário</h4>
+                                <p>O usuário compromete-se a utilizar o site para fins lícitos e respeitosos.</p>
+                                <h4 class="font-bold text-gray-800 mt-4">4. Limitação de Responsabilidade</h4>
+                                <p>As informações sobre datas de inauguração são previsões e podem sofrer alterações.</p>
+                                <h4 class="font-bold text-gray-800 mt-4">5. Doações</h4>
+                                <p>Todas as doações realizadas são voluntárias e não reembolsáveis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal('termsModal')" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Lógica -->
+    <script>
+        // Log de Doações (Simulando Banco de Dados)
+        const donationLog = [];
+
+        // Menu Mobile
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        // Modais Genéricos
+        function openModal(modalID) {
+            document.getElementById(modalID).classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+
+        function closeModal(modalID) {
+            document.getElementById(modalID).classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        // Função Específica para Abrir Detalhes do Evento
+        function showEventDetails(title, date, time, location, description) {
+            document.getElementById('eventTitle').innerText = title;
+            document.getElementById('eventDate').innerText = date;
+            document.getElementById('eventTime').innerText = time;
+            document.getElementById('eventLocation').innerText = location;
+            document.getElementById('eventDescription').innerText = description;
+            openModal('eventModal');
+        }
+
+        // --- SISTEMA DE DOAÇÃO ---
+
+        // 1. Abrir Modal de Cadastro
+        function openDonationModal(method) {
+            document.getElementById('selectedPaymentMethod').value = method;
+            openModal('donationFormModal');
+        }
+
+        // 2. Processar Formulário
+        function processDonation(e) {
+            e.preventDefault();
+            
+            // Coletar Dados
+            const name = document.getElementById('donorName').value;
+            const email = document.getElementById('donorEmail').value;
+            const cpf = document.getElementById('donorCPF').value;
+            const amount = document.getElementById('donationAmount').value;
+            const method = document.getElementById('selectedPaymentMethod').value;
+            const date = new Date().toLocaleString();
+
+            // Salvar no Log (Simulação de DB)
+            const donationRecord = {
+                id: Math.floor(Math.random() * 10000),
+                date: date,
+                name: name,
+                email: email,
+                cpf: cpf,
+                amount: amount,
+                method: method,
+                status: 'Pendente' // Será atualizado para 'Confirmado'
+            };
+            
+            donationLog.push(donationRecord);
+            
+            // Log para Controle Mensal (Visível no Console F12)
+            console.log("--- NOVO REGISTRO DE DOAÇÃO ---");
+            console.table(donationRecord);
+            console.log("Total arrecadado no log local: ", donationLog.length, " doações.");
+
+            // Fechar form e mostrar tela de pagamento
+            closeModal('donationFormModal');
+            showPaymentScreen(method, amount, email);
+        }
+
+        // 3. Mostrar Tela de Pagamento Específica
+        function showPaymentScreen(method, amount, email) {
+            const contentDiv = document.getElementById('paymentContent');
+            let html = '';
+
+            if (method === 'credit_card' || method === 'google_pay') {
+                // Simulação de Processamento
+                html = `
+                    <div class="py-8">
+                        <i class="fas fa-circle-notch fa-spin text-5xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Processando Pagamento Seguro...</h3>
+                        <p class="text-gray-500 mt-2">Aguarde um momento.</p>
+                    </div>
+                `;
+                contentDiv.innerHTML = html;
+                openModal('paymentInfoModal');
+
+                // Simular sucesso após 2 segundos
+                setTimeout(() => {
+                    completeDonation(email, amount);
+                }, 2500);
+
+            } else if (method === 'bank_transfer') {
+                // Dados Bancários e PIX
+                html = `
+                    <div class="text-left">
+                        <h3 class="text-xl font-bold text-green-800 mb-4 text-center">Dados para Depósito / PIX</h3>
+                        <div class="bg-gray-100 p-4 rounded mb-4 text-center border border-gray-300">
+                            <p class="text-xs text-gray-500 uppercase font-bold">Chave PIX (CNPJ)</p>
+                            <p class="text-xl font-mono font-bold text-gray-800 my-2">00.000.000/0001-00</p>
+                            <button onclick="navigator.clipboard.writeText('00.000.000/0001-00'); alert('Chave PIX copiada!')" class="text-blue-600 text-sm underline">Copiar Chave</button>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-700 border-t pt-4">
+                            <p><strong>Banco:</strong> Banco do Brasil (001)</p>
+                            <p><strong>Agência:</strong> 0000-X</p>
+                            <p><strong>Conta Corrente:</strong> 00000-0</p>
+                            <p><strong>Favorecido:</strong> Centro de Acolhimento Bartimeu</p>
+                            <p><strong>CNPJ:</strong> 00.000.000/0001-00</p>
+                        </div>
+                        <button onclick="completeDonation('${email}', '${amount}')" class="mt-6 w-full bg-green-600 text-white py-3 rounded font-bold hover:bg-green-700">
+                            Já fiz a transferência (Confirmar)
+                        </button>
+                    </div>
+                `;
+                contentDiv.innerHTML = html;
+                openModal('paymentInfoModal');
+            }
+        }
+
+        // 4. Finalizar e Simular Envio de Recibo
+        function completeDonation(email, amount) {
+            const contentDiv = document.getElementById('paymentContent');
+            
+            // Atualizar status no log
+            const lastLog = donationLog[donationLog.length - 1];
+            lastLog.status = 'Confirmado';
+            console.log("--- STATUS ATUALIZADO: PAGAMENTO CONFIRMADO ---");
+            console.log(`Recibo gerado e enviado para: ${email}`);
+
+            const html = `
+                <div class="py-6">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800">Doação Confirmada!</h3>
+                    <p class="text-gray-600 mt-2">Muito obrigado pela sua generosidade.</p>
+                    <div class="bg-blue-50 border border-blue-200 rounded p-3 mt-6 text-sm text-blue-800">
+                        <i class="fas fa-envelope-open-text mr-2"></i>
+                        O recibo no valor de <strong>R$ ${amount}</strong> foi enviado para:<br>
+                        <strong>${email}</strong>
+                    </div>
+                    <button onclick="closeModal('paymentInfoModal')" class="mt-6 bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">Fechar</button>
+                </div>
+            `;
+            contentDiv.innerHTML = html;
+        }
+
+        // Fechar com ESC
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => modal.classList.add('hidden'));
+                document.body.classList.remove('modal-active');
+            }
+        };
+    </script>
+</body>
+</html>
