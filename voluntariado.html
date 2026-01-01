@@ -4,40 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seja Voluntário - Centro de Acolhimento Bartimeu</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Merriweather', serif; }
-        
-        .header-bg {
-            background-image: linear-gradient(rgba(22, 163, 74, 0.9), rgba(21, 128, 61, 0.8)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .activity-card {
-            transition: all 0.3s ease;
-        }
-        .activity-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
             <a href="index.html" class="flex items-center space-x-3">
                 <img src="Logo transparente.png" alt="Logo CAB" class="h-16 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60?text=CAB+Logo'; this.style.opacity='0.5';">
                 <div class="hidden md:block">
@@ -45,16 +30,42 @@
                     <span class="block text-lg font-light text-gray-600 leading-tight">Bartimeu</span>
                 </div>
             </a>
-            
-            <!-- Botão Voltar -->
-            <a href="index.html" class="flex items-center text-green-700 font-bold hover:text-green-900 transition">
-                <i class="fas fa-arrow-left mr-2"></i> Voltar ao Início
-            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <a href="index.html#inicio" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Início</a>
+                <a href="index.html#sobre" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">O Centro</a>
+                <a href="acolhimento.html" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Acolhimento</a>
+                <a href="index.html#metodologia" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Nossa Base</a>
+                <a href="index.html#agenda" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Agenda</a>
+                <a href="voluntariado.html" class="text-green-700 font-bold transition text-sm">Voluntariado</a>
+                <a href="index.html#obras" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Obras</a>
+                <a href="index.html#doacao" class="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg transform hover:-translate-y-0.5 text-sm">
+                    <i class="fas fa-heart mr-1"></i>Doar
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="index.html#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Início</a>
+            <a href="index.html#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">O Centro</a>
+            <a href="acolhimento.html" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Quero Ajuda (Acolhimento)</a>
+            <a href="index.html#metodologia" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Nossa Base</a>
+            <a href="index.html#agenda" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Calendário de Eventos</a>
+            <a href="voluntariado.html" class="block py-3 px-6 text-green-700 font-bold bg-green-50">Seja Voluntário</a>
+            <a href="index.html#obras" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Acompanhar Obra</a>
+            <a href="index.html#doacao" class="block py-3 px-6 text-green-700 font-bold bg-green-50">Fazer Doação</a>
         </div>
     </nav>
 
     <!-- Header da Página -->
-    <header class="header-bg h-[60vh] flex items-center justify-center text-center px-4 mt-20">
+    <header class="voluntariado-header-bg h-[60vh] flex items-center justify-center text-center px-4 mt-20">
         <div class="max-w-4xl mx-auto text-white">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">Junte-se à Família Bartimeu</h1>
             <p class="text-xl font-light text-green-100">"Ninguém é tão pobre que não possa dar nada, nem tão rico que não precise receber." - Doutrina Espírita</p>
@@ -78,7 +89,7 @@
             <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Temos diversas áreas onde seus talentos podem florescer. Veja alguns exemplos de atividades que desenvolvemos:</p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Card 1: Artes e Cultura -->
                 <div class="activity-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
@@ -194,7 +205,7 @@
             <p class="text-green-100 mb-10 text-lg">
                 Entre em contato com nosso coordenador de voluntariado. Ele irá tirar suas dúvidas e agendar sua visita de boas-vindas.
             </p>
-            
+
             <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 inline-block w-full max-w-md">
                 <div class="flex flex-col items-center">
                     <div class="w-24 h-24 bg-gray-300 rounded-full mb-4 flex items-center justify-center overflow-hidden border-4 border-green-500">
@@ -203,7 +214,7 @@
                     </div>
                     <h3 class="text-2xl font-bold">Sr. Daniel Machado</h3>
                     <p class="text-green-300 text-sm uppercase tracking-widest mb-6">Coordenador de Voluntariado</p>
-                    
+
                     <a href="https://wa.me/seunumerodewhatsapp" class="bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-8 rounded-full transition shadow-lg w-full mb-3 flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2 text-xl"></i> Falar no WhatsApp
                     </a>
@@ -221,6 +232,9 @@
             <p>&copy; 2025 Centro de Acolhimento Bartimeu. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- Scripts de Lógica -->
+    <script src="script.js"></script>
 
 </body>
 </html>

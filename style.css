@@ -1,0 +1,130 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+}
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Common Components --- */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #16a34a; /* Verde esperança */
+    margin: 10px auto;
+}
+
+/* Modal Styles */
+.modal {
+    transition: opacity 0.25s ease;
+}
+body.modal-active {
+    overflow-x: hidden;
+    overflow-y: visible !important;
+}
+
+/* --- Index Page Styles --- */
+.hero-bg {
+    background-image: linear-gradient(rgba(0, 50, 30, 0.7), rgba(0, 50, 30, 0.6)), url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.volunteer-bg {
+    background-image: linear-gradient(rgba(22, 163, 74, 0.9), rgba(21, 128, 61, 0.9)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Calendar Styles */
+.calendar-day {
+    min-height: 80px;
+    transition: all 0.2s;
+}
+.calendar-day:hover {
+    background-color: #f0fdf4;
+}
+.has-event {
+    cursor: pointer;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+.has-event:hover {
+    background-color: #dcfce7;
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.event-dot {
+    height: 8px;
+    width: 8px;
+    background-color: #16a34a;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.event-label {
+    font-size: 0.7rem;
+    color: #166534;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Payment Buttons */
+.btn-payment {
+    transition: all 0.3s;
+}
+.btn-payment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Acolhimento Page Styles --- */
+.acolhimento-header-bg {
+    background-image: linear-gradient(rgba(0, 50, 30, 0.8), rgba(0, 50, 30, 0.7)), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.step-card {
+    transition: all 0.3s ease;
+}
+.step-card:hover {
+    transform: translateY(-5px);
+    border-color: #16a34a;
+}
+.photo-frame {
+    border: 8px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.4s ease;
+}
+.photo-frame:hover {
+    transform: scale(1.02);
+}
+
+/* --- Voluntariado Page Styles --- */
+.voluntariado-header-bg {
+    background-image: linear-gradient(rgba(22, 163, 74, 0.9), rgba(21, 128, 61, 0.8)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.activity-card {
+    transition: all 0.3s ease;
+}
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
