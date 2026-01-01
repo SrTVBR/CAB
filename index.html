@@ -174,9 +174,9 @@
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
                 <!-- Month Header -->
                 <div class="bg-green-700 text-white p-4 flex justify-between items-center">
-                    <button class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-left"></i></button>
-                    <h3 class="text-xl font-bold uppercase tracking-wide">Outubro 2025</h3>
-                    <button class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-right"></i></button>
+                    <button id="prevMonthBtn" class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="calendarMonthYear" class="text-xl font-bold uppercase tracking-wide">Outubro 2025</h3>
+                    <button id="nextMonthBtn" class="hover:bg-green-600 p-2 rounded-full transition"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <!-- Days Header -->
@@ -191,71 +191,8 @@
                 </div>
 
                 <!-- Calendar Grid -->
-                <div class="grid grid-cols-7 text-sm">
-                    <!-- Previous Month Days -->
-                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">28</div>
-                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">29</div>
-                    <div class="calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b">30</div>
-                    
-                    <!-- Current Month Days -->
-                    <div class="calendar-day p-2 border-r border-b">1</div>
-                    <div class="calendar-day p-2 border-r border-b">2</div>
-                    
-                    <!-- Event Day -->
-                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Palestra Pública: O Poder da Fé', '03/10/2025', '19:30', 'Centro Espírita Tomás de Aquino', 'Uma reflexão sobre como a fé raciocinada pode mover montanhas em nossas vidas. Aberto ao público.')">
-                        <span class="font-bold">3</span>
-                        <div class="mt-2">
-                            <span class="event-dot"></span>
-                            <span class="event-label">Palestra Pública</span>
-                        </div>
-                    </div>
-
-                    <div class="calendar-day p-2 border-r border-b">4</div>
-                    <div class="calendar-day p-2 border-r border-b">5</div>
-                    <div class="calendar-day p-2 border-r border-b">6</div>
-                    <div class="calendar-day p-2 border-r border-b">7</div>
-                    <div class="calendar-day p-2 border-r border-b">8</div>
-                    <div class="calendar-day p-2 border-r border-b">9</div>
-
-                    <!-- Event Day -->
-                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Bazar Solidário da Construção', '10/10/2025', '09:00 às 17:00', 'Sede do CAB (Terreno)', 'Grande bazar de roupas, utensílios e lanches. Toda a renda será revertida para a compra de cimento para o alicerce.')">
-                        <span class="font-bold">10</span>
-                        <div class="mt-2">
-                            <span class="event-dot bg-yellow-500"></span>
-                            <span class="event-label text-yellow-700">Bazar Beneficente</span>
-                        </div>
-                    </div>
-
-                    <div class="calendar-day p-2 border-r border-b">11</div>
-                    <div class="calendar-day p-2 border-r border-b">12</div>
-                    <div class="calendar-day p-2 border-r border-b">13</div>
-                    <div class="calendar-day p-2 border-r border-b">14</div>
-                    <div class="calendar-day p-2 border-r border-b">15</div>
-                    <div class="calendar-day p-2 border-r border-b">16</div>
-                    <div class="calendar-day p-2 border-r border-b">17</div>
-                    
-                    <!-- Event Day -->
-                    <div class="calendar-day p-2 border-r border-b has-event" onclick="showEventDetails('Mutirão de Limpeza', '18/10/2025', '07:00', 'Sede do CAB (Terreno)', 'Convidamos todos os voluntários para um dia de trabalho e alegria. Vamos preparar o terreno para a fundação. Traga suas luvas!')">
-                        <span class="font-bold">18</span>
-                        <div class="mt-2">
-                            <span class="event-dot bg-blue-500"></span>
-                            <span class="event-label text-blue-700">Mutirão</span>
-                        </div>
-                    </div>
-
-                    <div class="calendar-day p-2 border-r border-b">19</div>
-                    <div class="calendar-day p-2 border-r border-b">20</div>
-                    <div class="calendar-day p-2 border-r border-b">21</div>
-                    <div class="calendar-day p-2 border-r border-b">22</div>
-                    <div class="calendar-day p-2 border-r border-b">23</div>
-                    <div class="calendar-day p-2 border-r border-b">24</div>
-                    <div class="calendar-day p-2 border-r border-b">25</div>
-                    <div class="calendar-day p-2 border-r border-b">26</div>
-                    <div class="calendar-day p-2 border-r border-b">27</div>
-                    <div class="calendar-day p-2 border-r border-b">28</div>
-                    <div class="calendar-day p-2 border-r border-b">29</div>
-                    <div class="calendar-day p-2 border-r border-b">30</div>
-                    <div class="calendar-day p-2 border-r border-b">31</div>
+                <div id="calendarGrid" class="grid grid-cols-7 text-sm">
+                    <!-- Javascript will populate this -->
                 </div>
             </div>
             

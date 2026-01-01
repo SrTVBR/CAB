@@ -1,6 +1,42 @@
 // Log de Doações (Simulando Banco de Dados)
 const donationLog = [];
 
+// Events Data
+const events = [
+    {
+        date: '2025-10-03',
+        title: 'Palestra Pública: O Poder da Fé',
+        time: '19:30',
+        location: 'Centro Espírita Tomás de Aquino',
+        description: 'Uma reflexão sobre como a fé raciocinada pode mover montanhas em nossas vidas. Aberto ao público.',
+        type: 'Palestra Pública',
+        dotClass: '', // Default green
+        labelClass: '' // Default green text
+    },
+    {
+        date: '2025-10-10',
+        title: 'Bazar Solidário da Construção',
+        time: '09:00 às 17:00',
+        location: 'Sede do CAB (Terreno)',
+        description: 'Grande bazar de roupas, utensílios e lanches. Toda a renda será revertida para a compra de cimento para o alicerce.',
+        type: 'Bazar Beneficente',
+        dotClass: 'bg-yellow-500',
+        labelClass: 'text-yellow-700'
+    },
+    {
+        date: '2025-10-18',
+        title: 'Mutirão de Limpeza',
+        time: '07:00',
+        location: 'Sede do CAB (Terreno)',
+        description: 'Convidamos todos os voluntários para um dia de trabalho e alegria. Vamos preparar o terreno para a fundação. Traga suas luvas!',
+        type: 'Mutirão',
+        dotClass: 'bg-blue-500',
+        labelClass: 'text-blue-700'
+    }
+];
+
+let currentCalendarDate = new Date();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Menu Mobile
     const btn = document.getElementById('mobile-menu-btn');
@@ -19,6 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('modal-active');
         }
     };
+
+    // Initialize Calendar if element exists
+    if (document.getElementById('calendarGrid')) {
+        renderCalendar(currentCalendarDate);
+
+        document.getElementById('prevMonthBtn').addEventListener('click', () => {
+            const newDate = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() - 1, 1);
+            // Optional: Limit navigation to not go before Oct 2025 as per user context
+            // if (newDate < new Date(2025, 9, 1)) return;
+            currentCalendarDate = newDate;
+            renderCalendar(currentCalendarDate);
+        });
+
+        document.getElementById('nextMonthBtn').addEventListener('click', () => {
+            currentCalendarDate = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() + 1, 1);
+            renderCalendar(currentCalendarDate);
+        });
+    }
 });
 
 // Modais Genéricos
@@ -41,6 +95,94 @@ function showEventDetails(title, date, time, location, description) {
     document.getElementById('eventDescription').innerText = description;
     openModal('eventModal');
 }
+
+// --- CALENDAR LOGIC ---
+function renderCalendar(date) {
+    const grid = document.getElementById('calendarGrid');
+    const monthYearDisplay = document.getElementById('calendarMonthYear');
+
+    if (!grid || !monthYearDisplay) return;
+
+    grid.innerHTML = '';
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    // Portuguese Month Names
+    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+
+    // First day of the month (0 = Sunday, 1 = Monday, ...)
+    const firstDay = new Date(year, month, 1).getDay();
+
+    // Days in current month
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Days in previous month
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+    // Render Previous Month Padding Days
+    for (let i = 0; i < firstDay; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b';
+        dayDiv.textContent = daysInPrevMonth - firstDay + 1 + i;
+        grid.appendChild(dayDiv);
+    }
+
+    // Render Current Month Days
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day p-2 border-r border-b relative group';
+
+        // Date string for comparison YYYY-MM-DD
+        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        // Find events for this day
+        const dayEvents = events.filter(e => e.date === dateString);
+
+        if (dayEvents.length > 0) {
+            dayDiv.classList.add('has-event');
+
+            // Allow multiple events, but visually simplified for now
+            const event = dayEvents[0];
+
+            // Format Date for display
+            const displayDate = `${String(day).padStart(2,'0')}/${String(month+1).padStart(2,'0')}/${year}`;
+
+            dayDiv.onclick = () => showEventDetails(event.title, displayDate, event.time, event.location, event.description);
+
+            let content = `<span class="font-bold">${day}</span>`;
+            content += `
+                <div class="mt-2">
+                    <span class="event-dot ${event.dotClass}"></span>
+                    <span class="event-label ${event.labelClass}">${event.type}</span>
+                </div>
+            `;
+            dayDiv.innerHTML = content;
+        } else {
+            dayDiv.textContent = day;
+        }
+
+        grid.appendChild(dayDiv);
+    }
+
+    // Calculate remaining cells to fill the grid (optional, but looks better)
+    const totalCells = firstDay + daysInMonth;
+    const remainingCells = 7 - (totalCells % 7);
+
+    if (remainingCells < 7) {
+        for (let i = 1; i <= remainingCells; i++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day bg-gray-50 text-gray-400 p-2 border-r border-b';
+            dayDiv.textContent = i;
+            grid.appendChild(dayDiv);
+        }
+    }
+}
+
 
 // --- SISTEMA DE DOAÇÃO ---
 
