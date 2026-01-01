@@ -4,48 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acolhimento - Centro de Acolhimento Bartimeu</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Merriweather', serif; }
-        
-        .header-bg {
-            background-image: linear-gradient(rgba(0, 50, 30, 0.8), rgba(0, 50, 30, 0.7)), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .step-card {
-            transition: all 0.3s ease;
-        }
-        .step-card:hover {
-            transform: translateY(-5px);
-            border-color: #16a34a;
-        }
-        .photo-frame {
-            border: 8px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: transform 0.4s ease;
-        }
-        .photo-frame:hover {
-            transform: scale(1.02);
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Navbar (Mesma do Index para consistência) -->
+    <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
             <a href="index.html" class="flex items-center space-x-3">
                 <img src="Logo transparente.png" alt="Logo CAB" class="h-16 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60?text=CAB+Logo'; this.style.opacity='0.5';">
                 <div class="hidden md:block">
@@ -53,16 +30,42 @@
                     <span class="block text-lg font-light text-gray-600 leading-tight">Bartimeu</span>
                 </div>
             </a>
-            
-            <!-- Botão Voltar -->
-            <a href="index.html" class="flex items-center text-green-700 font-bold hover:text-green-900 transition">
-                <i class="fas fa-arrow-left mr-2"></i> Voltar ao Início
-            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <a href="index.html#inicio" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Início</a>
+                <a href="index.html#sobre" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">O Centro</a>
+                <a href="acolhimento.html" class="text-green-700 font-bold transition text-sm">Acolhimento</a>
+                <a href="index.html#metodologia" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Nossa Base</a>
+                <a href="index.html#agenda" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Agenda</a>
+                <a href="voluntariado.html" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Voluntariado</a>
+                <a href="index.html#obras" class="text-gray-600 hover:text-green-700 font-medium transition text-sm">Obras</a>
+                <a href="index.html#doacao" class="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg transform hover:-translate-y-0.5 text-sm">
+                    <i class="fas fa-heart mr-1"></i>Doar
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="index.html#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Início</a>
+            <a href="index.html#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">O Centro</a>
+            <a href="acolhimento.html" class="block py-3 px-6 text-green-700 font-bold bg-green-50">Quero Ajuda (Acolhimento)</a>
+            <a href="index.html#metodologia" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Nossa Base</a>
+            <a href="index.html#agenda" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Calendário de Eventos</a>
+            <a href="voluntariado.html" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Seja Voluntário</a>
+            <a href="index.html#obras" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Acompanhar Obra</a>
+            <a href="index.html#doacao" class="block py-3 px-6 text-green-700 font-bold bg-green-50">Fazer Doação</a>
         </div>
     </nav>
 
     <!-- Header da Página -->
-    <header class="header-bg h-[50vh] flex items-center justify-center text-center px-4 mt-20">
+    <header class="acolhimento-header-bg h-[50vh] flex items-center justify-center text-center px-4 mt-20">
         <div class="max-w-4xl mx-auto text-white">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">Passos para o Acolhimento</h1>
             <p class="text-xl font-light text-green-100">"Vem e vê." - O primeiro passo para a mudança é o desejo sincero de recomeçar.</p>
@@ -89,7 +92,7 @@
     <section class="py-12 bg-green-50">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center max-w-6xl mx-auto">
-                
+
                 <!-- Foto 1: Laborterapia -->
                 <div class="text-center">
                     <div class="photo-frame relative h-80 w-full rounded-lg overflow-hidden mb-6">
@@ -124,7 +127,7 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-6 max-w-5xl">
             <h2 class="text-3xl font-bold text-gray-800 mb-12 text-center">Passo a Passo para o Ingresso</h2>
-            
+
             <div class="space-y-6">
                 <!-- Passo 1 -->
                 <div class="step-card bg-white border border-gray-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
@@ -223,6 +226,9 @@
             <p class="mt-2">"Fora da caridade não há salvação."</p>
         </div>
     </footer>
+
+    <!-- Scripts de Lógica -->
+    <script src="script.js"></script>
 
 </body>
 </html>
